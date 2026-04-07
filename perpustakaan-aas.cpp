@@ -3,6 +3,7 @@
 #include<chrono>
 #include<thread>
 #include<string>
+#include<stdio.h> //buat clear output
 
 using namespace std;
 
@@ -33,19 +34,42 @@ User user[64];
 Buku buku[64];
 int totalregis = 0; //total register di struct
 int totalbuku = 0;
+bool run = true;
+int menu;
+int submenu;
+int tanya;
+int funcpilihan;
 
 int main() {
 
-	registrasi();
-	tambahbuku();
-	cout << "\nTotal Register yang ada : " << totalregis << endl;
-	cout << "Total Buku yang ada : " << totalbuku << endl;
+	while (run) {
+		cout << "=============== MENU UTAMA ================" << endl;
+		cout << "1. Menu Mahasiswa" << endl;
+		cout << "2. Admin Perpustakaan" << endl;
+		cout << "===========================================" << endl;
+		cout << "Masukan Pilihan Mu : ";
+		cin >> menu;
 
-	cekbuku();
-	cekregistrasi();
-
-
-
+		system("cls"); //bersihkan output
+		switch (menu) {
+		case 1:
+			cout << "Selamat Datang dimenu Mahasiswa!" << endl;
+			cout << "1. Pembuatan Akun Perpustakaan" << endl;
+			cout << "2. Cek Akun Anda" << endl;
+			cout << "3. Peminjaman Buku" << endl;
+			cout << "4. Pengembalian Buku" << endl;
+			cout << "Masukan Pilihan kamu : ";
+			cin >> submenu;
+			system("cls"); //bersihkan output
+				switch (submenu) {
+				case 1:
+					registrasi();
+					}
+				case 2:
+					cekregistrasi();
+		}
+	}
+	
 	return 0;
 };
 
@@ -64,22 +88,39 @@ void registrasi() {
 	cin >> user[totalregis].nim;
 	totalregis++; //trigger +1
 	loading();
-	cout << "Berhasil Memasukan ke database!" << endl;
+	cout << "Berhasil Registrasi Akun!" << endl << endl;
+	cout << "Masih Mau Registrasi ? (1/0) : ";
+	cin >> funcpilihan;
+	if (funcpilihan == 1) {
+		registrasi();
+	}
+
 };
 
 
 //cek registrasi funct
 void cekregistrasi() {
-	for (int i = 0; i < totalregis; i++) {
-		cout << "\n====Data Registrasi ke - " << i + 1 << "====" << endl;
-		cout << "Nama : " << user[i].nama << endl;
-		cout << "Jurusan : " << user[i].jurusan << endl;
-		cout << "Kelas : " << user[i].kelas << endl;
-		cout << "NIM : " << user[i].nim << endl;
-		cout << "=================================" << endl;
-	}
-};
 
+	if (totalregis > 0) {
+		for (int i = 0; i < totalregis; i++) {
+			cout << "\n====Data Registrasi ke - " << i + 1 << "====" << endl;
+			cout << "Nama : " << user[i].nama << endl;
+			cout << "Jurusan : " << user[i].jurusan << endl;
+			cout << "Kelas : " << user[i].kelas << endl;
+			cout << "NIM : " << user[i].nim << endl;
+			cout << "=================================" << endl;
+		}
+	}
+	else {
+		cout << "Data registrasi masih kosong!" << endl;
+	}
+	cout << "Masih Mau Lihat Akun Mahasiswa ? (1/0) : ";
+	cin >> funcpilihan;
+	if (funcpilihan == 1) {
+		cekregistrasi();
+	}
+	system("cls");
+};
 
 
 //tambah buku kedatabase
@@ -102,13 +143,19 @@ void tambahbuku() {
 
 //funct cek buku didatabase
 void cekbuku() {
-	for (int i = 0; i < totalbuku; i++) {
-		cout << "\n====Data Buku ke - " << i + 1 << "====" << endl;
-		cout << "Judul Buku : " << buku[i].judul << endl;
-		cout << "Nama Pengarang Buku : " << buku[i].pengarang << endl;
-		cout << "Tempat Buku : " << buku[i].rak << endl;
-		cout << "Stok yang ada : " << buku[i].stok << endl;
-		cout << "=================================" << endl;
+	if (totalbuku > 0) {
+
+		for (int i = 0; i < totalbuku; i++) {
+			cout << "\n====Data Buku ke - " << i + 1 << "====" << endl;
+			cout << "Judul Buku : " << buku[i].judul << endl;
+			cout << "Nama Pengarang Buku : " << buku[i].pengarang << endl;
+			cout << "Tempat Buku : " << buku[i].rak << endl;
+			cout << "Stok yang ada : " << buku[i].stok << endl;
+			cout << "=================================" << endl;
+		}
+	}
+	else {
+		cout << "Data Buku DiPerpustakaan Masih Kosong!" << endl;
 	}
 
 };
