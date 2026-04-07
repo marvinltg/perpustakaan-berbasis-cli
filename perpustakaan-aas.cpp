@@ -28,8 +28,9 @@ void cekregistrasi(); //cek apakah mahasiswa sudah mempunyai account (belum)
 void tambahbuku(); //tambah buku ke database (belum)
 void cekbuku(); //cek status buku (belum)
 void loading(); //loading animasi (selesai)
+void lanjut(void ya());
 
-//config db
+//config program (db/logika)
 User user[64];
 Buku buku[64];
 int totalregis = 0; //total register di struct
@@ -64,9 +65,12 @@ int main() {
 				switch (submenu) {
 				case 1:
 					registrasi();
-					}
+					break;
 				case 2:
 					cekregistrasi();
+					break;
+				}
+				
 		}
 	}
 	
@@ -89,17 +93,15 @@ void registrasi() {
 	totalregis++; //trigger +1
 	loading();
 	cout << "Berhasil Registrasi Akun!" << endl << endl;
-	cout << "Masih Mau Registrasi ? (1/0) : ";
-	cin >> funcpilihan;
-	if (funcpilihan == 1) {
-		registrasi();
-	}
+	
+	lanjut(registrasi);
 
 };
 
 
 //cek registrasi funct
 void cekregistrasi() {
+
 
 	if (totalregis > 0) {
 		for (int i = 0; i < totalregis; i++) {
@@ -110,16 +112,10 @@ void cekregistrasi() {
 			cout << "NIM : " << user[i].nim << endl;
 			cout << "=================================" << endl;
 		}
-	}
-	else {
+	} else {
 		cout << "Data registrasi masih kosong!" << endl;
-	}
-	cout << "Masih Mau Lihat Akun Mahasiswa ? (1/0) : ";
-	cin >> funcpilihan;
-	if (funcpilihan == 1) {
-		cekregistrasi();
-	}
-	system("cls");
+		}
+	lanjut(cekregistrasi);
 };
 
 
@@ -139,6 +135,7 @@ void tambahbuku() {
 	totalbuku++;
 	loading();
 	cout << "Success memasukan buku ke database!" << endl;
+
 };
 
 //funct cek buku didatabase
@@ -170,3 +167,13 @@ void loading() {
 	}
 	cout << endl;
 };
+
+//func lanjut atau tidak
+void lanjut(void ya()) {
+	cout << "Masih Mau Lanjut ? (1/0) : ";
+	cin >> funcpilihan;
+	if (funcpilihan == 1) {
+		ya();
+	}
+	system("cls");
+}
