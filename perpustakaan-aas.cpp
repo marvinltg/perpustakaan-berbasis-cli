@@ -46,6 +46,7 @@ int funcpilihan;
 
 
 int main() {
+
 	buku[0].judul = "Pemuda Solo Yang Baik Hati";
 	buku[0].pengarang = "Pria Oslo";
 	buku[0].rak = "2b Sejarah Lt.2";
@@ -61,7 +62,10 @@ int main() {
 	user[1].kelas = "2 teknik informatika 5";
 	user[1].nim = 25024126;
 
-	cekuser("Marvin Letunaung");
+	while (run) {
+
+	pinjambuku();
+	}
 
 		return 0;
 	};
@@ -149,25 +153,18 @@ void cekbuku() {
 
 };
 
-//void pinjambuku() {
-//	string nama;
-//	string judulbuku;
-//	int totbuku;
-//	for(int i=0; )
-//	cout << "Selamat Datang DiMenu Peminjaman Buku!" << endl;
-//	cout << "Masukan Nama Akun Kamu : ";
-//	getline(cin, nama);
-//	if (nama == user[].nama) {
-//		cout << "Masukan Nama Buku :";
-//		getline(cin, judulbuku);
-//		if (buku == buku[].judul) {
-//			cout << "Kamu Akan Meminjam Buku : " << buku << endl;
-//			cout << "Masukan Jumlah Buku Yang Akan Kamu Pinjam :";
-//			cin >> totbuku;
-//			bukti(nama, judulbuku, totbuku);
-//		}
-//	}
-//}
+void pinjambuku() {
+	string nama;
+	string judulbuku;
+	int totbuku;
+	cout << "Selamat datang di menu peminjaman buku!" << endl;
+	cout << "Masukan Nama : ";
+	getline(cin, nama);
+	cout << "Welcome : ", cekuser(nama);
+	cout << endl;
+	system("pause");
+}
+
 
 void bukti(string nama, string buku, int totbuku) {
 	cout << "======== BUKTI PEMINJAMAN BUKU =======" << endl;
@@ -176,6 +173,20 @@ void bukti(string nama, string buku, int totbuku) {
 	cout << "Total Buku Yang diPinjam : " << totbuku << endl;
 	cout << "======================================" << endl;
 
+}
+
+void cekuser(string nama) {
+	for (int i = 0; i <= totalregis; i++) {
+		if (nama == user[i].nama) {
+			nama = user[i].nama;
+			cout << nama;
+			break;
+		}
+		else {
+			cout << "Akun dengan Nama Tersebut tidak ditemukan!" << endl;
+
+		}
+	}
 }
 
 
@@ -199,16 +210,3 @@ void lanjut(void ya()) {
 	system("cls");
 }
 
-void cekuser(string nama) {
-	for (int i = 0; i <= totalregis; i++) {
-		if (nama == user[i].nama) {
-			nama = user[i].nama;
-			cout << nama;
-			break;
-		}
-		else {
-			cout << "Akun dengan Nama Tersebut tidak ditemukan!" << endl;
-
-		}
-	}
-}

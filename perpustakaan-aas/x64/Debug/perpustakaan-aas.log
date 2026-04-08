@@ -1,2 +1,3 @@
 ﻿  perpustakaan-aas.cpp
+C:\Users\HYPE AMD\source\repos\perpustakaan-aas\perpustakaan-aas.cpp(159,6): warning C4101: 'totbuku': unreferenced local variable
   perpustakaan-aas.vcxproj -> C:\Users\HYPE AMD\source\repos\perpustakaan-aas\x64\Debug\perpustakaan-aas.exe
