@@ -30,12 +30,13 @@ void cekbuku(); //cek status buku (belum)
 void loading(); //loading animasi (selesai)
 void pinjambuku();// peminjaman buku
 void lanjut(void ya());
+void cekuser(string nama); //cek user
 
 //config program (db/logika)
 User user[64];
 Buku buku[64];
-int totalregis = 0; //total register di struct
-int totalbuku = 1;
+int totalregis = 2; //total register di struct
+int totalbuku = 0;
 bool run = true;
 int menu;
 int submenu;
@@ -50,39 +51,18 @@ int main() {
 	buku[0].rak = "2b Sejarah Lt.2";
 	buku[0].stok = 200;
 
-	while (run) {
-		cout << "=============== MENU UTAMA ================" << endl;
-		cout << "1. Menu Mahasiswa" << endl;
-		cout << "2. Admin Perpustakaan" << endl;
-		cout << "===========================================" << endl;
-		cout << "Masukan Pilihan Mu : ";
-		cin >> menu;
+	user[0].nama = "Marvin Letunaung";
+	user[0].jurusan = "Teknik Elektro";
+	user[0].kelas = "2 teknik informatika 5";
+	user[0].nim = 25024128;
 
-		system("cls"); //bersihkan output
-		switch (menu) {
-		case 1:
-			cout << "Selamat Datang dimenu Mahasiswa!" << endl;
-			cout << "1. Pembuatan Akun Perpustakaan" << endl;
-			cout << "2. Cek Akun Anda" << endl;
-			cout << "3. Peminjaman Buku" << endl;
-			cout << "4. Pengembalian Buku" << endl;
-			cout << "Masukan Pilihan kamu : ";
-			cin >> submenu;
-			system("cls"); //bersihkan output
-			switch (submenu) {
-			case 1:
-				registrasi();
-				break;
-			case 2:
-				cekregistrasi();
-				break;
-			case 3:
-				cekbuku();
-				break;
+	user[1].nama = "Christian Mandalika";
+	user[1].jurusan = "Teknik Elektro";
+	user[1].kelas = "2 teknik informatika 5";
+	user[1].nim = 25024126;
 
-		}
-	}
-}
+	cekuser("Marvin Letunaung");
+
 		return 0;
 	};
 	
@@ -169,8 +149,33 @@ void cekbuku() {
 
 };
 
-void pinjambuku() {
-	cout << "Proses";
+//void pinjambuku() {
+//	string nama;
+//	string judulbuku;
+//	int totbuku;
+//	for(int i=0; )
+//	cout << "Selamat Datang DiMenu Peminjaman Buku!" << endl;
+//	cout << "Masukan Nama Akun Kamu : ";
+//	getline(cin, nama);
+//	if (nama == user[].nama) {
+//		cout << "Masukan Nama Buku :";
+//		getline(cin, judulbuku);
+//		if (buku == buku[].judul) {
+//			cout << "Kamu Akan Meminjam Buku : " << buku << endl;
+//			cout << "Masukan Jumlah Buku Yang Akan Kamu Pinjam :";
+//			cin >> totbuku;
+//			bukti(nama, judulbuku, totbuku);
+//		}
+//	}
+//}
+
+void bukti(string nama, string buku, int totbuku) {
+	cout << "======== BUKTI PEMINJAMAN BUKU =======" << endl;
+	cout << "Nama :" << nama << endl;
+	cout << "Judul Buku :" << buku << endl;
+	cout << "Total Buku Yang diPinjam : " << totbuku << endl;
+	cout << "======================================" << endl;
+
 }
 
 
@@ -192,4 +197,18 @@ void lanjut(void ya()) {
 		ya();
 	}
 	system("cls");
+}
+
+void cekuser(string nama) {
+	for (int i = 0; i <= totalregis; i++) {
+		if (nama == user[i].nama) {
+			nama = user[i].nama;
+			cout << nama;
+			break;
+		}
+		else {
+			cout << "Akun dengan Nama Tersebut tidak ditemukan!" << endl;
+
+		}
+	}
 }
