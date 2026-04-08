@@ -28,20 +28,27 @@ void cekregistrasi(); //cek apakah mahasiswa sudah mempunyai account (belum)
 void tambahbuku(); //tambah buku ke database (belum)
 void cekbuku(); //cek status buku (belum)
 void loading(); //loading animasi (selesai)
+void pinjambuku();// peminjaman buku
 void lanjut(void ya());
 
 //config program (db/logika)
 User user[64];
 Buku buku[64];
 int totalregis = 0; //total register di struct
-int totalbuku = 0;
+int totalbuku = 1;
 bool run = true;
 int menu;
 int submenu;
 int tanya;
 int funcpilihan;
 
+
+
 int main() {
+	buku[0].judul = "Pemuda Solo Yang Baik Hati";
+	buku[0].pengarang = "Pria Oslo";
+	buku[0].rak = "2b Sejarah Lt.2";
+	buku[0].stok = 200;
 
 	while (run) {
 		cout << "=============== MENU UTAMA ================" << endl;
@@ -62,20 +69,24 @@ int main() {
 			cout << "Masukan Pilihan kamu : ";
 			cin >> submenu;
 			system("cls"); //bersihkan output
-				switch (submenu) {
-				case 1:
-					registrasi();
-					break;
-				case 2:
-					cekregistrasi();
-					break;
-				}
-				
+			switch (submenu) {
+			case 1:
+				registrasi();
+				break;
+			case 2:
+				cekregistrasi();
+				break;
+			case 3:
+				cekbuku();
+				break;
+
 		}
 	}
+}
+		return 0;
+	};
 	
-	return 0;
-};
+
 
 //registrasi account
 void registrasi() {
@@ -135,7 +146,7 @@ void tambahbuku() {
 	totalbuku++;
 	loading();
 	cout << "Success memasukan buku ke database!" << endl;
-
+	lanjut(tambahbuku);
 };
 
 //funct cek buku didatabase
@@ -143,7 +154,7 @@ void cekbuku() {
 	if (totalbuku > 0) {
 
 		for (int i = 0; i < totalbuku; i++) {
-			cout << "\n====Data Buku ke - " << i + 1 << "====" << endl;
+			cout << "\n====Data Buku ke - " << i + 1 << " ====" << endl;
 			cout << "Judul Buku : " << buku[i].judul << endl;
 			cout << "Nama Pengarang Buku : " << buku[i].pengarang << endl;
 			cout << "Tempat Buku : " << buku[i].rak << endl;
@@ -154,8 +165,13 @@ void cekbuku() {
 	else {
 		cout << "Data Buku DiPerpustakaan Masih Kosong!" << endl;
 	}
+	lanjut(cekbuku);
 
 };
+
+void pinjambuku() {
+	cout << "Proses";
+}
 
 
 //loading func
