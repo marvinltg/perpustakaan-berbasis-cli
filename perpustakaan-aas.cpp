@@ -29,28 +29,33 @@ void tambahbuku(); //tambah buku ke database (belum)
 void cekbuku(); //cek status buku (belum)
 void loading(); //loading animasi (selesai)
 void pinjambuku();// peminjaman buku
+void bukti(string nama, string buku, int totbuku);
 void lanjut(void ya());
-void cekuser(string nama); //cek user
+int cekuser(string nama); //cek user
 
 //config program (db/logika)
 User user[64];
 Buku buku[64];
-int totalregis = 2; //total register di struct
-int totalbuku = 0;
+int totalregis = 3; //total register di struct
+int totalbuku = 2;
 bool run = true;
 int menu;
 int submenu;
 int tanya;
 int funcpilihan;
-
-
+string query;
 
 int main() {
 
 	buku[0].judul = "Pemuda Solo Yang Baik Hati";
 	buku[0].pengarang = "Pria Oslo";
 	buku[0].rak = "2b Sejarah Lt.2";
-	buku[0].stok = 200;
+	buku[0].stok = 0;
+
+	buku[0].judul = "Sejarah Rapper Lil bah";
+	buku[0].pengarang = "Wobo Senja";
+	buku[0].rak = "21b Social Lt.2";
+	buku[0].stok = 5;
 
 	user[0].nama = "Marvin Letunaung";
 	user[0].jurusan = "Teknik Elektro";
@@ -61,6 +66,11 @@ int main() {
 	user[1].jurusan = "Teknik Elektro";
 	user[1].kelas = "2 teknik informatika 5";
 	user[1].nim = 25024126;
+
+	user[2].nama = "Jefrael Dalos";
+	user[2].jurusan = "Teknik Elektro";
+	user[2].kelas = "2 teknik informatika 5";
+	user[2].nim = 25024127;
 
 	while (run) {
 
@@ -133,6 +143,7 @@ void tambahbuku() {
 	lanjut(tambahbuku);
 };
 
+
 //funct cek buku didatabase
 void cekbuku() {
 	if (totalbuku > 0) {
@@ -153,18 +164,65 @@ void cekbuku() {
 
 };
 
+
 void pinjambuku() {
 	string nama;
 	string judulbuku;
 	int totbuku;
-	cout << "Selamat datang di menu peminjaman buku!" << endl;
+	int index;
+	int indexbuku;
+	cin.ignore();
+	cout << "\nSelamat datang di menu peminjaman buku!" << endl;
 	cout << "Masukan Nama : ";
 	getline(cin, nama);
-	cout << "Welcome : ", cekuser(nama);
-	cout << endl;
-	system("pause");
-}
 
+	index = cekuser(nama);
+
+	if (index != -1) {
+		cout << "Hallo " << nama << endl;
+		cout << "Masukan Judul Buku : ";
+		getline(cin, judulbuku);
+
+		// cek buku
+		indexbuku = -1;
+		for (int i = 0; i < totalbuku; i++) {
+			if (judulbuku == buku[i].judul) {
+				indexbuku = i;
+				break;
+			}
+		}
+
+		if (indexbuku != -1) {
+			
+			cout << "Jumlah Buku : ";
+			cin >> totbuku;
+
+			if (totbuku <= buku[indexbuku].stok) {
+
+				buku[indexbuku].stok -= totbuku;
+
+				loading();
+				cout << "Buku berhasil dipinjam!\n";
+
+				bukti(nama, judulbuku, totbuku);
+
+			}
+			else {
+				cout << "Stok Buku Tidak Cukup!" << endl;
+			}
+
+		}
+		else {
+			cout << "Judul Buku Tidak Ditemukan!" << endl;
+		}
+
+	}
+	else {
+		cout << "User dengan Nama tersebut tidak ada!" << endl;
+		system("pause");
+		system("cls");
+	}
+}
 
 void bukti(string nama, string buku, int totbuku) {
 	cout << "======== BUKTI PEMINJAMAN BUKU =======" << endl;
@@ -172,21 +230,18 @@ void bukti(string nama, string buku, int totbuku) {
 	cout << "Judul Buku :" << buku << endl;
 	cout << "Total Buku Yang diPinjam : " << totbuku << endl;
 	cout << "======================================" << endl;
+	system("pause");
 
 }
 
-void cekuser(string nama) {
+int cekuser(string nama) {
 	for (int i = 0; i <= totalregis; i++) {
 		if (nama == user[i].nama) {
-			nama = user[i].nama;
-			cout << nama;
-			break;
+			return i;
 		}
-		else {
-			cout << "Akun dengan Nama Tersebut tidak ditemukan!" << endl;
-
-		}
+		
 	}
+	return -1;
 }
 
 
@@ -199,6 +254,7 @@ void loading() {
 	}
 	cout << endl;
 };
+
 
 //func lanjut atau tidak
 void lanjut(void ya()) {
