@@ -33,6 +33,7 @@ void pinjambuku();// peminjaman buku
 void bukti(string nama, string buku, int totbuku);
 void lanjut(void ya());
 int cekuser(string nama); //cek user
+void semuauser(string p);
 
 //config program (db/logika)
 User user[64];
@@ -74,8 +75,10 @@ int main() {
 	user[2].nim = 25024127;
 
 	while (run) {
-
-	pinjambuku();
+		string p;
+		cout << "Hallo Admin Mau Cek Semua data apa ? (user/buku) : ";
+		getline(cin, p);
+		semuauser(p);
 	}
 
 		return 0;
@@ -207,7 +210,7 @@ void pinjambuku() {
 				cin >> totbuku;
 
 				if (buku[indexbuku].stok <= 0) {
-					cout << "Stok Buku sudah habis"<< endl;
+					cout << "Stok Buku tidak tersedia"<< endl;
 					clearterminal();
 					break;
 				}
@@ -265,6 +268,38 @@ int cekuser(string nama) {
 }
 
 
+void semuauser(string p) {
+	int mode;
+	cout << "\n========== Semua Data " << p << " Yang Ada ===========" << endl;
+	if (p == "user") {
+		mode = totalregis;
+		for (int i = 0; i < mode; i++) {
+			cout << "Nama : " << user[i].nama << endl;
+			cout << "Kelas : " << user[i].kelas << endl;
+			cout << "Jurusan : " << user[i].jurusan << endl;
+			cout << "NIM : " << user[i].nim << endl << endl;
+		}
+		cout << "==================================================" << endl;
+	}
+	else if (p == "buku") {
+		mode = totalbuku;
+		for (int i = 0; i < mode; i++) {
+			cout << "Judul Buku : " << buku[i].judul << endl;
+			cout << "Pengarang Buku : " << buku[i].pengarang << endl;
+			cout << "Tempat Buku berada : " << buku[i].rak << endl;
+			cout << "Total Stok : " << buku[i].stok << endl << endl;
+	
+		}
+		cout << "==================================================" << endl;
+	}
+	else {
+		cout << "Jenis Tidak Valid!" << endl;
+		clearterminal();
+	}
+
+	}
+
+
 //loading func
 void loading() {
 	cout << "Processing";
@@ -275,6 +310,8 @@ void loading() {
 	cout << endl;
 };
 
+
+//biar bersih ocdringan soalnya :D
 void clearterminal() {
 	cout << "clear";
 	for (int i = 0; i <= 20; i++) {
