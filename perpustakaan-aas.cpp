@@ -33,7 +33,8 @@ void pinjambuku();// peminjaman buku
 void bukti(string nama, string buku, int totbuku);
 void lanjut(void ya());
 int cekuser(string nama); //cek user
-void semuauser(string p);
+void cekdata(string p); //fix
+void hapusdata(string p);
 
 //config program (db/logika)
 User user[64];
@@ -75,10 +76,11 @@ int main() {
 	user[2].nim = 25024127;
 
 	while (run) {
-		string p;
-		cout << "Hallo Admin Mau Cek Semua data apa ? (user/buku) : ";
-		getline(cin, p);
-		semuauser(p);
+		string menu;
+		cout << "Masukan Data yang ingin di hapus (user/buku) :";
+		getline(cin, menu);
+		hapusdata(menu);
+		cekdata(menu);
 	}
 
 		return 0;
@@ -268,7 +270,7 @@ int cekuser(string nama) {
 }
 
 
-void semuauser(string p) {
+void cekdata(string p) {
 	int mode;
 	cout << "\n========== Semua Data " << p << " Yang Ada ===========" << endl;
 	if (p == "user") {
@@ -298,6 +300,45 @@ void semuauser(string p) {
 	}
 
 	}
+
+
+void hapusdata(string p) {
+	string target;
+	bool found = false;
+	if (p == "user") {
+		cout << "Masukan Nama Mahasiswa : ";
+		getline(cin, target);
+		//baris
+		for (int i = 0; i < totalregis; i++) { 
+			if (user[i].nama == target) {
+				//kolom ke -> kiri 
+				for (int j = 0; j < totalregis -1; j++) {
+					user[j] = user[j + 1];
+				}
+				totalregis--;
+				found = true;
+			}
+			if (!found) {
+				cout << "User " << target << " Tidak Ditemukakn!"<<endl;
+			}
+		}
+	}
+	else if (p == "buku") {
+		cout << "Masukan Judul Buku : ";
+		for (int i = 0; i < totalbuku; i++) {
+			if (buku[i].judul == target) {
+				for (int j = 0; j < totalbuku; j++) {
+					buku[j] = buku[j + 1];
+				}
+				totalbuku--;
+				found = true;
+			}
+			if (!found) {
+				cout << "Judul Buku " << target << " Tidak Ditemukakn!" << endl;
+			}
+		}
+	}
+}
 
 
 //loading func
