@@ -11,6 +11,7 @@ struct User {
 	string nama;
 	string kelas;
 	string jurusan;
+	string peminjamanbuku;
 	int nim;
 };
 
@@ -35,6 +36,16 @@ void lanjut(void ya());
 int cekuser(string nama); //cek user
 void cekdata(string p); //fix
 void hapusdata(string p);
+void pengembalianbuku();
+void riwayatpeminjaman();
+void caribuku();
+
+//fitur yang belum ada 
+/*
+pengembalianbuku();
+riwayatpeminjaman();
+caribuku();
+*/
 
 //config program (db/logika)
 User user[64];
@@ -64,16 +75,7 @@ int main() {
 	user[0].jurusan = "Teknik Elektro";
 	user[0].kelas = "2 teknik informatika 5";
 	user[0].nim = 25024128;
-
-	user[1].nama = "Christian Mandalika";
-	user[1].jurusan = "Teknik Elektro";
-	user[1].kelas = "2 teknik informatika 5";
-	user[1].nim = 25024126;
-
-	user[2].nama = "Jefrael Dalos";
-	user[2].jurusan = "Teknik Elektro";
-	user[2].kelas = "2 teknik informatika 5";
-	user[2].nim = 25024127;
+	user[0].peminjamanbuku = "Sejarah Rapper Lil bah";
 
 	while (run) {
 		string menu;
@@ -351,6 +353,19 @@ void loading() {
 	cout << endl;
 };
 
+
+void pengembalianbuku(string jbuku) {
+	string bbuku;
+	cout << "Masukan buku yang ingin dibalikan : ";
+	getline(cin, bbuku);
+
+	for (int i = 0; i < totalregis; i++) {
+		if (jbuku == jbuku) {
+
+	}
+
+	}
+}
 
 //biar bersih ocdringan soalnya :D
 void clearterminal() {
