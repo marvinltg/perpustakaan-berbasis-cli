@@ -38,19 +38,13 @@ void cekdata(string p); //fix
 void hapusdata(string p);
 void pengembalianbuku();
 void riwayatpeminjaman();
-void caribuku();
 
-//fitur yang belum ada 
-/*
-pengembalianbuku();
-riwayatpeminjaman();
-caribuku();
-*/
+
 
 //config program (db/logika)
 User user[64];
 Buku buku[64];
-int totalregis = 3; //total register di struct
+int totalregis = 0; //total register di struct
 int totalbuku = 2;
 bool run = true;
 int menu;
@@ -61,33 +55,126 @@ string query;
 
 int main() {
 
-	buku[0].judul = "Pemuda Solo Yang Baik Hati";
-	buku[0].pengarang = "Pria Oslo";
-	buku[0].rak = "2b Sejarah Lt.2";
-	buku[0].stok = 0;
+	buku[0].judul = "kancil baik hati";
+	buku[0].pengarang = "Rahimsyah";
+	buku[0].rak = "2b Dongeng Lt.2";
+	buku[0].stok = 2;
 
-	buku[1].judul = "Sejarah Rapper Lil bah";
-	buku[1].pengarang = "Wobo Senja";
+	buku[1].judul = "cara kaya diumur 20tahun";
+	buku[1].pengarang = "Timothy";
 	buku[1].rak = "21b Social Lt.2";
 	buku[1].stok = 1;
 
-	user[0].nama = "Marvin Letunaung";
-	user[0].jurusan = "Teknik Elektro";
-	user[0].kelas = "2 teknik informatika 5";
-	user[0].nim = 25024128;
-	user[0].peminjamanbuku = "Sejarah Rapper Lil bah";
-
 	while (run) {
-		string menu;
-		cout << "Masukan Data yang ingin di hapus (user/buku) :";
-		getline(cin, menu);
-		hapusdata(menu);
-		cekdata(menu);
-	}
 
-		return 0;
-	};
+		cout << "========== LOGIN MENU ==========" << endl;
+		cout << "1. Mahasiswa" << endl;
+		cout << "2. Admin" << endl;
+		cout << "0. Keluar" << endl;
+		cout << "================================" << endl;
+		cout << "Pilih Login : ";
+		cin >> menu;
+		cin.ignore();
+
+		system("cls");
+
+		if (menu == 1) {
+			cout << "========== MENU MAHASISWA ==========" << endl;
+			cout << "1. Registrasi Mahasiswa" << endl;
+			cout << "2. Cek Buku yang tersedia" << endl;
+			cout << "3. Pinjam Buku" << endl;
+			cout << "4. Pengembalian Buku" << endl;
+			cout << "0. Kembali" << endl;
+			cout << "====================================" << endl;
+			cout << "Pilih Menu : ";
+			cin >> submenu;
+			cin.ignore();
+
+			switch (submenu) {
+			case 1:
+				system("cls");
+				registrasi();
+				break;
+			case 2:
+				system("cls");
+				cekbuku();
+				break;
+			case 3:
+				system("cls");
+				pinjambuku();
+				break;
+			case 4:
+				system("cls");
+				pengembalianbuku();
+				break;
+			case 0:
+				system("cls");
+				break;
+			default:
+				cout << "Menu tidak valid!" << endl;
+				system("pause");
+				system("cls");
+				break;
+			}
+		}
+		else if (menu == 2) {
+			cout << "========== MENU ADMIN ==========" << endl;
+			cout << "1. Cek Data Registrasi" << endl;
+			cout << "2. Tambah Buku" << endl;
+			cout << "3. Cek Data Buku" << endl;
+			cout << "4. Hapus Data" << endl;
+			cout << "0. Kembali" << endl;
+			cout << "===============================" << endl;
+			cout << "Pilih Menu : ";
+			cin >> submenu;
+			cin.ignore();
+
+			switch (submenu) {
+			case 1:
+				system("cls");
+				cekregistrasi();
+				break;
+			case 2:
+				system("cls");
+				tambahbuku();
+				break;
+			case 3:
+				system("cls");
+				cekbuku();
+				break;
+			case 4:
+				system("cls");
+				cout << "Masukan Data yang ingin dihapus (user/buku) : ";
+				getline(cin, query);
+				hapusdata(query);
+				cekdata(query);
+				system("pause");
+				system("cls");
+				break;
+			case 0:
+				system("cls");
+				break;
+			default:
+				cout << "Menu tidak valid!" << endl;
+				system("pause");
+				system("cls");
+				break;
+			}
+		}
+		else if (menu == 0) {
+			run = false;
+			cout << "Program selesai. Terima kasih!" << endl;
+		}
+		else {
+			cout << "Pilihan login tidak valid!" << endl;
+			system("pause");
+			system("cls");
+		}
+	}
 	
+
+	return 0;
+}
 
 
 //registrasi account
@@ -354,18 +441,47 @@ void loading() {
 };
 
 
-void pengembalianbuku(string jbuku) {
-	string bbuku;
-	cout << "Masukan buku yang ingin dibalikan : ";
-	getline(cin, bbuku);
+void pengembalianbuku() {
+	string judul;
+	int jumlah;
+	bool found = false;
 
-	for (int i = 0; i < totalregis; i++) {
-		if (jbuku == jbuku) {
+	cout << "========== PENGEMBALIAN BUKU ==========" << endl;
+	cout << "Masukan Judul Buku : ";
+	getline(cin, judul);
 
+	for (int i = 0; i < totalbuku; i++) {
+
+		if (judul == buku[i].judul) {
+			found = true;
+
+			cout << "Judul Buku : " << buku[i].judul << endl;
+			cout << "Stok Saat Ini : " << buku[i].stok << endl;
+
+			cout << "Jumlah Buku Yang Dikembalikan : ";
+			cin >> jumlah;
+
+			buku[i].stok += jumlah;
+
+			loading();
+
+			cout << "Buku berhasil dikembalikan!" << endl;
+			cout << "Total stok sekarang : " << buku[i].stok << endl;
+
+			system("pause");
+			system("cls");
+			break;
+		}
 	}
 
+	if (!found) {
+		cout << "Judul Buku Tidak Ditemukan!" << endl;
+		system("pause");
+		system("cls");
 	}
 }
+
+
 
 //biar bersih ocdringan soalnya :D
 void clearterminal() {
