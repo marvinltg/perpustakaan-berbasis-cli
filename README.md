@@ -21,13 +21,14 @@ Tugas besar ini merupakan implementasi **Struktur Data dan Algoritma (Data Struc
 ## Tampilan Aplikasi
 
 ### Menu Awal
-![Menu Awal](Screenshot 2026-05-17 202143.png)
+![Menu Awal](awal.png)
 
 ### Menu Mahasiswa
-![Menu Mahasiswa](Screenshot 2026-05-17 202153.png)
+![Menu Mahasiswa](mahasiswa.png)
 
 ### Menu Admin
-![Menu Admin](Screenshot 2026-05-17 202210.png)
+![Menu Admin](admin.png)
+
 ---
 
 ## Cara Penggunaan
