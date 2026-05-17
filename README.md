@@ -18,13 +18,16 @@ Tugas besar ini merupakan implementasi **Struktur Data dan Algoritma (Data Struc
 
 ---
 
-## Fitur Aplikasi
+## Tampilan Aplikasi
 
-- Registrasi Account Mahasiswa
-- Add stock Buku ke perpustakaan, format (Judul Buku|Judul Pengarang|Tempat Buku|Jumlah Stok)
-- Cek Database Registrasi Mahasiswa
-- Cek Buku Yang Ada di Database
+### Menu Awal
+![Menu Awal](Screenshot 2026-05-17 202143.png)
 
+### Menu Mahasiswa
+![Menu Mahasiswa](Screenshot 2026-05-17 202153.png)
+
+### Menu Admin
+![Menu Admin](Screenshot 2026-05-17 202210.png)
 ---
 
 ## Cara Penggunaan
